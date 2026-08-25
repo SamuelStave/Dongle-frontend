@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, AlertTriangle, Info, XCircle } from "lucide-react";
+import { AlertTriangle, Info, XCircle } from "lucide-react";
 import { MappedError } from "@/lib/error-mapper";
 
 interface ErrorDisplayProps {
@@ -51,26 +51,26 @@ export default function ErrorDisplay({
   if (variant === "inline") {
     return (
       <div
-        className={`flex items-start gap-3 p-4 rounded-xl border ${colorScheme.bg} ${colorScheme.border}`}
+        className={lex items-start gap-3 p-4 rounded-xl border  }
       >
-        <Icon className={`w-5 h-5 mt-0.5 shrink-0 ${colorScheme.icon}`} />
+        <Icon className={w-5 h-5 mt-0.5 shrink-0 } />
         <div className="flex-1 min-w-0">
-          <p className={`text-sm font-medium ${colorScheme.text}`}>
+          <p className={	ext-sm font-medium }>
             {error.userMessage}
           </p>
           {error.actionable && (
-            <p className={`text-xs mt-1 ${colorScheme.text} opacity-80`}>
+            <p className={	ext-xs mt-1  opacity-80}>
               {error.actionable}
             </p>
           )}
           {showTechnicalDetails && error.technicalDetails && (
             <details className="mt-2">
-              <summary className={`text-xs cursor-pointer ${colorScheme.text} opacity-60 hover:opacity-100`}>
+              <summary className={	ext-xs cursor-pointer  opacity-60 hover:opacity-100}>
                 Technical details
               </summary>
-              <pre className={`text-xs mt-1 p-2 rounded bg-black/5 dark:bg-white/5 overflow-x-auto ${colorScheme.text} font-mono`}>
+              <pre className={	ext-xs mt-1 p-2 rounded bg-black/5 dark:bg-white/5 overflow-x-auto  font-mono}>
                 {error.technicalDetails}
-                {error.code && `\nCode: ${error.code}`}
+                {error.code && \nCode: }
               </pre>
             </details>
           )}
@@ -78,7 +78,7 @@ export default function ErrorDisplay({
         {onClose && (
           <button
             onClick={onClose}
-            className={`shrink-0 ${colorScheme.text} opacity-50 hover:opacity-100 transition-opacity`}
+            className={shrink-0  opacity-50 hover:opacity-100 transition-opacity}
             aria-label="Close"
           >
             <XCircle className="w-4 h-4" />
@@ -91,15 +91,15 @@ export default function ErrorDisplay({
   if (variant === "banner") {
     return (
       <div
-        className={`flex items-center gap-3 px-6 py-4 border-b ${colorScheme.bg} ${colorScheme.border}`}
+        className={lex items-center gap-3 px-6 py-4 border-b  }
       >
-        <Icon className={`w-5 h-5 shrink-0 ${colorScheme.icon}`} />
+        <Icon className={w-5 h-5 shrink-0 } />
         <div className="flex-1 min-w-0">
-          <p className={`text-sm font-medium ${colorScheme.text}`}>
+          <p className={	ext-sm font-medium }>
             {error.userMessage}
           </p>
           {error.actionable && (
-            <p className={`text-xs mt-0.5 ${colorScheme.text} opacity-80`}>
+            <p className={	ext-xs mt-0.5  opacity-80}>
               {error.actionable}
             </p>
           )}
@@ -107,7 +107,7 @@ export default function ErrorDisplay({
         {onClose && (
           <button
             onClick={onClose}
-            className={`shrink-0 ${colorScheme.text} opacity-50 hover:opacity-100 transition-opacity`}
+            className={shrink-0  opacity-50 hover:opacity-100 transition-opacity}
             aria-label="Close"
           >
             <XCircle className="w-4 h-4" />
@@ -121,9 +121,9 @@ export default function ErrorDisplay({
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
         <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl max-w-md w-full border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-          <div className={`flex items-center gap-3 px-6 py-4 border-b ${colorScheme.bg} ${colorScheme.border}`}>
-            <Icon className={`w-6 h-6 shrink-0 ${colorScheme.icon}`} />
-            <h3 className={`font-bold text-lg ${colorScheme.text}`}>
+          <div className={lex items-center gap-3 px-6 py-4 border-b  }>
+            <Icon className={w-6 h-6 shrink-0 } />
+            <h3 className={ont-bold text-lg }>
               {severity === "error" ? "Error" : severity === "warning" ? "Warning" : "Information"}
             </h3>
           </div>
@@ -143,7 +143,7 @@ export default function ErrorDisplay({
                 </summary>
                 <pre className="text-xs mt-2 p-3 rounded bg-zinc-100 dark:bg-zinc-800 overflow-x-auto text-zinc-600 dark:text-zinc-400 font-mono">
                   {error.technicalDetails}
-                  {error.code && `\nCode: ${error.code}`}
+                  {error.code && \nCode: }
                 </pre>
               </details>
             )}

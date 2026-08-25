@@ -427,19 +427,3 @@ function mapStorageError(
 export function getUserFriendlyMessage(error: unknown, category?: ErrorCategory): string {
   return mapError(error, category).userMessage;
 }
-
-/**
- * Check if error should be displayed to users in production
- */
-export function shouldDisplayError(error: MappedError): boolean {
-  // Always display mapped errors to users
-  return true;
-}
-
-/**
- * Format error for logging/debugging
- */
-export function formatErrorForLogging(error: unknown): string {
-  const mapped = mapError(error);
-  return `User Message: ${mapped.userMessage}\nTechnical: ${mapped.technicalDetails || "N/A"}\nCode: ${mapped.code || "N/A"}`;
-}
