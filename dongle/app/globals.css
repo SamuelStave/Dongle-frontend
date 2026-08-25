@@ -4,15 +4,15 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   
-  --color-primary: #3b82f6;
+  --color-primary: #2563eb;
   --color-primary-foreground: #ffffff;
   
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
   
-  --color-muted: #71717a;
-  --color-muted-foreground: #a1a1aa;
+  --color-muted: #52525b;
+  --color-muted-foreground: #52525b;
   
   --color-border: color-mix(in srgb, var(--foreground) 10%, transparent);
   --color-card: color-mix(in srgb, var(--background) 50%, transparent);

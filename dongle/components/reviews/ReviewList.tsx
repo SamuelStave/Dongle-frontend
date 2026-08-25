@@ -33,7 +33,7 @@ export default function ReviewList({
     return (
       <div className="text-center py-20 bg-zinc-50 dark:bg-zinc-900/50 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-800 px-4">
         {emptyTitle && <p className="text-base font-bold text-zinc-700 dark:text-zinc-300 mb-1">{emptyTitle}</p>}
-        <p className="text-zinc-500">{emptyMessage || "No reviews yet. Be the first to leave one!"}</p>
+        <p className="text-zinc-600 dark:text-zinc-400">{emptyMessage || "No reviews yet. Be the first to leave one!"}</p>
       </div>
     );
   }
@@ -64,29 +64,25 @@ export default function ReviewList({
             </div>
             <div className="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 rounded-lg">
               <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-              <span className="text-sm font-bold text-yellow-700 dark:text-yellow-500">{review.rating}</span>
+              <span className="text-sm font-bold text-yellow-700 dark:text-yellow-400">{review.rating}</span>
             </div>
           </div>
 
-          <p className="text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed">
+          <p className="text-zinc-700 dark:text-zinc-300 mb-6 leading-relaxed">
             {review.comment}
           </p>
 
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <div className="text-xs font-medium text-blue-500 px-2 py-1 bg-blue-50 dark:bg-blue-900/20 rounded">
+              <div className="text-xs font-medium text-blue-700 dark:text-blue-400 px-2 py-1 bg-blue-50 dark:bg-blue-900/20 rounded">
                 {review.projectName}
               </div>
 
               <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => onVoteHelpful?.(review.id)}
-                  className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full transition-all border ${
-                    review.helpfulVotes?.includes(currentUserAddress || "")
-                      ? "bg-green-50 border-green-200 text-green-700 dark:bg-green-900/20 dark:border-green-800 dark:text-green-500"
-                      : "bg-zinc-50 border-zinc-200 text-zinc-600 hover:bg-zinc-100 hover:text-black dark:bg-zinc-800 dark:border-zinc-850 dark:text-zinc-400 dark:hover:bg-zinc-700/50"
-                  }`}
-                  aria-label={`Mark as helpful, current count ${review.helpfulVotes?.length || 0}`}
+                  className={\inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full transition-all border \\}
+                  aria-label={\Mark as helpful, current count \\}
                 >
                   <ThumbsUp className="w-3 h-3" />
                   <span>{review.helpfulVotes?.length || 0}</span>
@@ -94,12 +90,8 @@ export default function ReviewList({
 
                 <button
                   onClick={() => onVoteUnhelpful?.(review.id)}
-                  className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full transition-all border ${
-                    review.unhelpfulVotes?.includes(currentUserAddress || "")
-                      ? "bg-red-50 border-red-200 text-red-700 dark:bg-red-900/20 dark:border-red-800 dark:text-red-500"
-                      : "bg-zinc-50 border-zinc-200 text-zinc-600 hover:bg-zinc-100 hover:text-black dark:bg-zinc-800 dark:border-zinc-850 dark:text-zinc-400 dark:hover:bg-zinc-700/50"
-                  }`}
-                  aria-label={`Mark as unhelpful, current count ${review.unhelpfulVotes?.length || 0}`}
+                  className={\inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full transition-all border \\}
+                  aria-label={\Mark as unhelpful, current count \\}
                 >
                   <ThumbsDown className="w-3 h-3" />
                   <span>{review.unhelpfulVotes?.length || 0}</span>
@@ -135,7 +127,7 @@ export default function ReviewList({
                     variant="ghost"
                     size="sm"
                   >
-                    <Flag className="w-4 h-4 text-zinc-400 hover:text-red-500" />
+                    <Flag className="w-4 h-4 text-zinc-500 hover:text-red-500" />
                   </IconButton>
                 )
               )}

@@ -55,8 +55,8 @@ export const ProjectCard = ({
         aria-pressed={isSaved}
         aria-label={
           isSaved
-            ? `Remove ${project.name} from saved projects`
-            : `Save ${project.name}`
+            ? Remove  from saved projects
+            : Save 
         }
         size="md"
         className="absolute right-4 top-4 z-10 rounded-full border border-zinc-200 dark:border-zinc-700 bg-white/95 dark:bg-zinc-900/95 p-2 text-zinc-500 shadow-sm transition-colors hover:border-blue-400 hover:text-blue-500 disabled:cursor-not-allowed disabled:opacity-40"
@@ -64,7 +64,7 @@ export const ProjectCard = ({
         {isSaved ? <BookmarkCheck /> : <Bookmark />}
       </IconButton>
 
-      {/* Compare toggle — rendered below the save button on the left */}
+      {/* Compare toggle - rendered below the save button on the left */}
       {showCompareCheckbox && (
         <IconButton
           type="button"
@@ -73,19 +73,13 @@ export const ProjectCard = ({
           aria-pressed={selected}
           aria-label={
             selected
-              ? `Remove ${project.name} from comparison`
+              ? Remove  from comparison
               : !canAddMore
-              ? `Cannot add ${project.name}: maximum 4 projects`
-              : `Add ${project.name} to comparison`
+              ? Cannot add : maximum 4 projects
+              : Add  to comparison
           }
           size="md"
-          className={`absolute left-4 top-4 z-10 rounded-full ${
-            selected
-              ? "bg-blue-500 text-white hover:bg-blue-600 hover:text-white"
-              : !canAddMore
-              ? "bg-zinc-200 dark:bg-zinc-700 text-zinc-400 cursor-not-allowed"
-              : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-500"
-          }`}
+          className={\bsolute left-4 top-4 z-10 rounded-full \\}
           title={
             selected
               ? "Remove from comparison"
@@ -98,7 +92,7 @@ export const ProjectCard = ({
         </IconButton>
       )}
 
-      <Link href={`/projects/${project.id}`} prefetch={getPrefetchValue("project-detail")} className="flex h-full flex-col">
+      <Link href={\/projects/\\} prefetch={getPrefetchValue("project-detail")} className="flex h-full flex-col">
         <ProjectImage
           logoUrl={project.logoUrl}
           name={project.name}
@@ -107,7 +101,7 @@ export const ProjectCard = ({
         />
         <div className="flex justify-between items-start mb-2 px-2">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-blue-500 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded">
+            <span className="text-xs font-semibold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded">
               {project.primaryCategory}
             </span>
             {verificationStatus && (
@@ -122,7 +116,7 @@ export const ProjectCard = ({
         <h3 className="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors">
           {project.name}
         </h3>
-        <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-4 line-clamp-2 grow">
+        <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4 line-clamp-2 grow">
           {project.description}
         </p>
         {project.tags && project.tags.length > 0 && (
@@ -130,14 +124,14 @@ export const ProjectCard = ({
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[11px] font-medium text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-full"
+                className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-full"
               >
                 {tag}
               </span>
             ))}
           </div>
         )}
-        <div className="flex justify-between items-center text-xs text-zinc-400 dark:text-zinc-500 mt-auto">
+        <div className="flex justify-between items-center text-xs text-zinc-500 dark:text-zinc-400 mt-auto">
           <span>{project.reviews} reviews</span>
           <span>Added {formatDate(project.createdAt, "short")}</span>
         </div>
