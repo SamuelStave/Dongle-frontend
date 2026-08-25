@@ -10,13 +10,14 @@ import React, {
 } from "react";
 import { walletService } from "@/services/wallet/wallet.service";
 import { SOROBAN_CONFIG } from "@/constants/contracts";
+import { WALLET_POLL_INTERVAL_MS } from "@/constants";
 import { toast } from "sonner";
 import {
   trackWalletConnect,
   trackWalletDisconnect,
 } from "@/lib/analytics";
 
-// ─── Network helpers ────────────────────────────────────────────────────────
+// ��� Network helpers ��������������������������������������������������������
 
 /** Human-readable label for a Stellar network passphrase. */
 export function getNetworkLabel(passphrase: string | null): string {
@@ -28,11 +29,11 @@ export function getNetworkLabel(passphrase: string | null): string {
   return "Custom";
 }
 
-/** The passphrase the app expects — sourced from env / constants. */
+/** The passphrase the app expects - sourced from env / constants. */
 export const EXPECTED_NETWORK_PASSPHRASE = SOROBAN_CONFIG.NETWORK_PASSPHRASE;
 export const EXPECTED_NETWORK_LABEL = getNetworkLabel(EXPECTED_NETWORK_PASSPHRASE);
 
-// ─── Context shape ──────────────────────────────────────────────────────────
+// ��� Context shape ����������������������������������������������������������
 
 interface WalletContextType {
   publicKey: string | null;
@@ -54,7 +55,7 @@ const WalletContext = createContext<WalletContextType | undefined>(undefined);
 
 const WALLET_STORAGE_KEY = "dongle_wallet_state";
 
-// ─── Provider ───────────────────────────────────────────────────────────────
+// ��� Provider ���������������������������������������������������������������
 
 export function WalletProvider({ children }: { children: ReactNode }) {
   const [publicKey, setPublicKey] = useState<string | null>(null);
@@ -70,7 +71,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
   const walletNetworkLabel = getNetworkLabel(walletNetwork);
 
-  // ── disconnect ─────────────────────────────────────────────────────────────
+  // �� disconnect �������������������������������������������������������������
   const disconnectWallet = useCallback(() => {
     setPublicKey(null);
     setIsConnected(false);
@@ -80,12 +81,12 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     toast.success("Wallet disconnected");
   }, []);
 
-  // ── detect Freighter on mount ──────────────────────────────────────────────
+  // �� detect Freighter on mount ����������������������������������������������
   useEffect(() => {
     void walletService.isFreighterAvailable().then(setIsFreighterAvailable);
   }, []);
 
-  // ── restore on mount ───────────────────────────────────────────────────────
+  // �� restore on mount �������������������������������������������������������
   useEffect(() => {
     const restore = async () => {
       try {
@@ -118,7 +119,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     restore();
   }, []);
 
-  // ── poll for account/network changes while connected ───────────────────────
+  // �� poll for account/network changes while connected �����������������������
   useEffect(() => {
     if (!isConnected) return;
 
@@ -147,11 +148,11 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       }
     };
 
-    const interval = setInterval(poll, 2000);
+    const interval = setInterval(poll, WALLET_POLL_INTERVAL_MS);
     return () => clearInterval(interval);
   }, [isConnected, publicKey, walletNetwork, disconnectWallet]);
 
-  // ── connect ────────────────────────────────────────────────────────────────
+  // �� connect ����������������������������������������������������������������
   const connectWallet = useCallback(async () => {
     if (isConnected) return;
 
@@ -183,7 +184,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       toast.success(
         onExpectedNetwork
           ? "Wallet connected successfully"
-          : `Wallet connected on ${getNetworkLabel(networkPassphrase)} — please switch to ${EXPECTED_NETWORK_LABEL}`,
+          : \Wallet connected on \ - please switch to \\,
         { id: toastId },
       );
     } catch (error) {
@@ -219,7 +220,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// ─── Hook ────────────────────────────────────────────────────────────────────
+// ��� Hook ��������������������������������������������������������������������
 
 export function useWallet(): WalletContextType {
   const context = useContext(WalletContext);

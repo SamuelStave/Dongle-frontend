@@ -7,6 +7,7 @@ import {
   nativeToScVal,
 } from "stellar-sdk";
 import { SOROBAN_CONFIG, DONGLE_CONTRACTS } from "@/constants/contracts";
+import { TRANSACTION_TIMEOUT_MS, TX_POLL_INTERVAL_MS, TX_POLL_TIMEOUT_MS } from "@/constants";
 import { walletService } from "@/services/wallet/wallet.service";
 import {
   EXPECTED_NETWORK_LABEL,
@@ -33,7 +34,7 @@ export interface SorobanTransactionOptions {
   intervalMs?: number;
 }
 
-// ─── Network mismatch error ──────────────────────────────────────────────────
+// ��� Network mismatch error ��������������������������������������������������
 
 export class NetworkMismatchError extends Error {
   readonly expectedNetwork: string;
@@ -43,8 +44,8 @@ export class NetworkMismatchError extends Error {
     const expectedLabel = EXPECTED_NETWORK_LABEL;
     const actualLabel = getNetworkLabel(actual);
     super(
-      `Wrong network: wallet is on ${actualLabel}, but this app requires ${expectedLabel}. ` +
-        `Please switch your Freighter wallet to ${expectedLabel} and try again.`,
+      Wrong network: wallet is on , but this app requires .  +
+        Please switch your Freighter wallet to  and try again.,
     );
     this.name = "NetworkMismatchError";
     this.expectedNetwork = EXPECTED_NETWORK_PASSPHRASE;
@@ -52,11 +53,11 @@ export class NetworkMismatchError extends Error {
   }
 }
 
-// ─── Wallet not connected error ──────────────────────────────────────────────
+// ��� Wallet not connected error ����������������������������������������������
 
 /**
  * Thrown when a transaction is attempted without a connected wallet.
- * Always surfaces as a real error — never silently falls back to mock data.
+ * Always surfaces as a real error - never silently falls back to mock data.
  */
 export class WalletNotConnectedError extends Error {
   constructor() {
@@ -109,9 +110,6 @@ export interface ProjectRegistrationParams {
   contractAddresses?: string[];
 }
 
-const DEFAULT_POLL_INTERVAL_MS = 2_000;
-const DEFAULT_POLL_TIMEOUT_MS = 60_000;
-
 function delayWithSignal(ms: number, signal?: AbortSignal): Promise<void> {
   return new Promise((resolve, reject) => {
     if (signal?.aborted) {
@@ -139,8 +137,8 @@ function delayWithSignal(ms: number, signal?: AbortSignal): Promise<void> {
 async function pollTransaction(
   hash: string,
   {
-    timeoutMs = DEFAULT_POLL_TIMEOUT_MS,
-    intervalMs = DEFAULT_POLL_INTERVAL_MS,
+    timeoutMs = TX_POLL_TIMEOUT_MS,
+    intervalMs = TX_POLL_INTERVAL_MS,
     onPhaseChange,
     signal,
   }: {
@@ -161,7 +159,7 @@ async function pollTransaction(
   while (last.status === "NOT_FOUND") {
     if (Date.now() - startedAt > timeoutMs) {
       throw new Error(
-        `[SorobanService] Timeout waiting for transaction ${hash}. Last status: ${last.status}`,
+        [SorobanService] Timeout waiting for transaction . Last status: ,
       );
     }
     if (signal?.aborted) {
@@ -174,7 +172,7 @@ async function pollTransaction(
 
   if (last.status !== "SUCCESS") {
     throw new Error(
-      `[SorobanService] Transaction ${hash} failed with status: ${last.status}`,
+      [SorobanService] Transaction  failed with status: ,
     );
   }
 
@@ -201,7 +199,7 @@ async function executeContractTransaction(
     networkPassphrase: SOROBAN_CONFIG.NETWORK_PASSPHRASE,
   })
     .addOperation(buildOperation(contract))
-    .setTimeout(30)
+    .setTimeout(TRANSACTION_TIMEOUT_MS / 1000)
     .build();
 
   const preparedTx = await server.prepareTransaction(unsignedTx);
@@ -293,7 +291,7 @@ export const sorobanService = {
       );
 
       console.log(
-        `[SorobanService] Verification request submitted: ${requestId}`,
+        [SorobanService] Verification request submitted: ,
       );
 
       return { hash: requestId, status: "SUCCESS" };
@@ -314,7 +312,7 @@ export const sorobanService = {
       const { verificationService } = await import("./verification.service");
       const status = await verificationService.getVerificationStatus(projectId);
       console.log(
-        `[SorobanService] Verification status for ${projectId}: ${status}`,
+        [SorobanService] Verification status for : ,
       );
       return status;
     } catch (error) {
@@ -331,7 +329,7 @@ export const sorobanService = {
    */
   async getProject(projectId: string): Promise<ProjectData | null> {
     try {
-      console.log(`[SorobanService] Getting project details for: ${projectId}`);
+      console.log([SorobanService] Getting project details for: );
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       const mockProjects: ProjectData[] = [
@@ -420,7 +418,7 @@ export const sorobanService = {
    * Only the current owner can initiate this transfer.
    * The new owner address is validated before submission.
    *
-   * Note: This operation requires underlying contract support (`transfer_ownership`).
+   * Note: This operation requires underlying contract support (\	ransfer_ownership\).
    */
   async transferOwnership(
     projectId: string,
@@ -458,8 +456,7 @@ export const sorobanService = {
     );
 
     console.log(
-      "[SorobanService] Ownership transfer successful:",
-      result.hash,
+      [SorobanService] Ownership transfer successful: ,
     );
     return result;
   },
@@ -468,4 +465,3 @@ export const sorobanService = {
     return server;
   },
 };
-
